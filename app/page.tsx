@@ -13,10 +13,10 @@ const RWA_POOLS = [
   { id: 'pool-3', name: 'Private Credit Pool Alpha (xPCA)', assetType: 'Corporate Debt', tvl: '$5.1M', currentAPY: '12.8%', risk: 'High' },
 ];
 
-const SMART_MONEY_SIGNALS = [
-  { pool: 'Private Credit Pool Alpha (xPCA)', signal: 'BULLISH', flow24h: '+$1.2M', confidence: '94%', activity: 'Whale Inflow (0x8f...3a9)' },
-  { pool: 'US Treasury Short-Term Bill (xT-Bill)', signal: 'NEUTRAL', flow24h: '+$150K', confidence: '88%', activity: 'Institutional Staking Hold' },
-  { pool: 'Tokenized Real Estate Yield (xRE-1)', signal: 'ACCUMULATE', flow24h: '+$680K', confidence: '91%', activity: 'Smart Money Rebalance' },
+const INITIAL_SMART_MONEY_SIGNALS = [
+  { pool: 'Private Credit Pool Alpha (xPCA)', signal: 'BULLISH', flow24h: '+$1.20M', confidence: '94%', activity: 'Whale Inflow (0x8f...3a9)' },
+  { pool: 'US Treasury Short-Term Bill (xT-Bill)', signal: 'NEUTRAL', flow24h: '+$0.15M', confidence: '88%', activity: 'Institutional Staking Hold' },
+  { pool: 'Tokenized Real Estate Yield (xRE-1)', signal: 'ACCUMULATE', flow24h: '+$0.68M', confidence: '91%', activity: 'Smart Money Rebalance' },
 ];
 
 const LIQUIDITY_FLOW_DATA = [
@@ -45,6 +45,30 @@ export default function Dashboard() {
   const [activeModel, setActiveModel] = useState<string>('AgentRouter Engine');
   const [selectedAiStrategy, setSelectedAiStrategy] = useState<any>(null);
   const [liveYields, setLiveYields] = useState<number[]>([0, 0, 0]);
+
+  // Dynamic Live Streaming Smart Money Signals
+  const [liveSignals, setLiveSignals] = useState(INITIAL_SMART_MONEY_SIGNALS);
+
+  useEffect(() => {
+    if (activeTab !== 'analytics') return;
+    
+    const interval = setInterval(() => {
+      setLiveSignals((prev) =>
+        prev.map((sig) => {
+          const delta = (Math.random() * 0.04 - 0.02);
+          const currentFlowStr = sig.flow24h.replace('+$', '').replace('M', '');
+          const currentFlow = parseFloat(currentFlowStr);
+          const newFlow = Math.max(0.01, currentFlow + delta).toFixed(2);
+          return {
+            ...sig,
+            flow24h: `+$${newFlow}M`,
+          };
+        })
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [activeTab]);
 
   const { data: walletBalance } = useBalance({ address });
 
@@ -298,11 +322,20 @@ export default function Dashboard() {
 
                 <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 flex justify-between items-center">
                   <div>
-                    <p className="text-xs font-semibold text-white">Auto-Rebalance Bot</p>
+                    <p className="text-xs font-semibold text-white flex items-center gap-1.5">
+                      Auto-Rebalance Bot
+                      {autoRebalanceBot && <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>}
+                    </p>
                     <p className="text-[10px] text-slate-400">Rebalance on liquidity shifts</p>
                   </div>
                   <button
-                    onClick={() => setAutoRebalanceBot(!autoRebalanceBot)}
+                    onClick={() => {
+                      const newState = !autoRebalanceBot;
+                      setAutoRebalanceBot(newState);
+                      if (newState) {
+                        runAIAnalysis();
+                      }
+                    }}
                     className={`w-11 h-6 rounded-full transition flex items-center px-1 ${autoRebalanceBot ? 'bg-emerald-500 justify-end' : 'bg-slate-800 justify-start'}`}
                   >
                     <span className="w-4 h-4 rounded-full bg-white shadow"></span>
@@ -373,7 +406,7 @@ export default function Dashboard() {
         {activeTab === 'analytics' && (
           <div className="space-y-8 animate-in fade-in duration-300">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {SMART_MONEY_SIGNALS.map((sig, idx) => (
+              {liveSignals.map((sig, idx) => (
                 <div key={idx} className="bg-slate-900 border border-slate-800 p-5 rounded-xl space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-slate-400 truncate">{sig.pool}</span>
@@ -383,7 +416,7 @@ export default function Dashboard() {
                   </div>
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-2xl font-bold text-white">{sig.flow24h}</p>
+                      <p className="text-2xl font-bold text-white font-mono">{sig.flow24h}</p>
                       <p className="text-[10px] text-slate-400">24h Net Liquidity Flow</p>
                     </div>
                     <div className="text-right">
@@ -392,7 +425,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <p className="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></span>
                     {sig.activity}
                   </p>
                 </div>

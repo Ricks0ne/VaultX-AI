@@ -24,7 +24,8 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
 2. **Web3 Integration:** Wagmi v2, Viem, RainbowKit (Targeting X Layer Testnet, Chain ID: 1952).
 3. **AI Pipeline:** AgentRouter (LLM routing across Claude 3.5 Sonnet & DeepSeek v3) with a local inference engine fallback.
 4. **Smart Contracts:** Solidity `^0.8.20` featuring multi-position tracking, time-weighted yield math, and referral fee distribution.
-
+### 🛡️ Smart Contract Architecture Note
+`VaultX.sol` serves as the **Vault Accounting & Strategy Router Layer**. It decouples user balances and time-weighted yield accrual from underlying asset contracts. In production, strategy allocation calls route through low-level `call()` interfaces directly to target ERC-20 RWA Vault addresses (e.g., Ondo, BlackRock BUIDL wrappers) on X Layer Mainnet.
 ---
 
 ## ⚙️ Local Setup Instructions
@@ -60,6 +61,6 @@ Network: X Layer Testnet (Chain ID: 1952)
 
 VaultX Contract Address: 0xf1A7651070f914876253Cb7b24588Be29878F583
 
-Live Web App: https://... (Replace with your Vercel URL)
+Live Web App: https://vault-x-ai.vercel.app/
 
 Developer: Ricks | Data Analyst, Statistician & Web3 Developer

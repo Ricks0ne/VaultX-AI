@@ -38,13 +38,17 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
 
 Bash
 npm install
+
 2. Configure Environment Variables:
+
 Create a .env.local file in the root directory:
 
  Code snippet
 NEXT_PUBLIC_VAULT_CONTRACT_ADDRESS=0xYourDeployedContractAddress
 AGENTROUTER_API_KEY=your_agentrouter_api_key
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+
+
 3. Run the Development Server:
 
 Bash

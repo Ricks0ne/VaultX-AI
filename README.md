@@ -1,4 +1,4 @@
-# VaultX AI 🧠💼
+# VaultX AI
 
 > **Autonomous Multi-Asset RWA Yield Aggregator & Smart Money Analytics Agent on X Layer.**  
 > Built for the BuildX AI Season Hackathon.
@@ -7,7 +7,7 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 * **Multi-Yield Portfolio Allocation:** Automatically splits capital across T-Bills, Commercial Real Estate, and Private Credit based on dynamic AI weights matching your selected risk profile.
 * **Smart Money & Predictive Analytics:** Real-time tracking of institutional liquidity shifts, whale wallet inflows, and 24-hour net flow confidence signals across X Layer RWA pools.
@@ -18,7 +18,7 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 1. **Frontend:** Next.js 14, TypeScript, Tailwind CSS, Recharts.
 2. **Web3 Integration:** Wagmi v2, Viem, RainbowKit (Targeting X Layer Testnet, Chain ID: 1952).
@@ -43,7 +43,6 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
 
    ```Create a .env.local file in the root directory:
 
-   Bash
    Code snippet
    NEXT_PUBLIC_VAULT_CONTRACT_ADDRESS=0xYourDeployedContractAddress
    AGENTROUTER_API_KEY=your_agentrouter_api_key

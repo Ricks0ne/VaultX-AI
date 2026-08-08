@@ -47,7 +47,7 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
    Code snippet
    NEXT_PUBLIC_VAULT_CONTRACT_ADDRESS=0xYourDeployedContractAddress
    AGENTROUTER_API_KEY=your_agentrouter_api_key
-`NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 
 
 4. Run the Development Server:

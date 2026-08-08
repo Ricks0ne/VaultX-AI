@@ -19,7 +19,7 @@ export const xLayerTestnet = {
 
 export const config = getDefaultConfig({
   appName: 'VaultX AI',
-  projectId: '044601f6521232330edc42350f9d6d5d',
+  projectId: '6ec2d3c31f5269464867b6d2ba914889',
   chains: [xLayerTestnet],
   transports: {
     [xLayerTestnet.id]: http('https://testrpc.xlayer.tech'),

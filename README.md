@@ -34,27 +34,27 @@ VaultX AI is a non-custodial, user-in-the-loop AI advisory and yield management 
    git clone [https://github.com/Ricks0ne/VaultX-AI.git](https://github.com/Ricks0ne/VaultX-AI.git)
    cd VaultX-AI
 
-1. Install Dependencies:
+2. Install Dependencies:
 
-Bash
-npm install
+    ```bash
+    npm install
 
-2. Configure Environment Variables:
+3. Configure Environment Variables:
 
-Create a .env.local file in the root directory:
+   ```Create a .env.local file in the root directory:
 
-Bash
-Code snippet
-NEXT_PUBLIC_VAULT_CONTRACT_ADDRESS=0xYourDeployedContractAddress
-AGENTROUTER_API_KEY=your_agentrouter_api_key
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+   Bash
+   Code snippet
+   NEXT_PUBLIC_VAULT_CONTRACT_ADDRESS=0xYourDeployedContractAddress
+   AGENTROUTER_API_KEY=your_agentrouter_api_key
+`NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 
 
-3. Run the Development Server:
+4. Run the Development Server:
 
-Bash
-npm run dev
-Open http://localhost:3000 in your browser.
+   ```Bash
+   npm run dev
+   Open http://localhost:3000 in your browser.
 
 🔗 Deployment & Verification
 Network: X Layer Testnet (Chain ID: 1952)

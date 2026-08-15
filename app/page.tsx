@@ -510,11 +510,7 @@ export default function Dashboard() {
                     <p className="text-[10px] text-slate-400">Trigger AI re-evaluations on liquidity shifts</p>
                   </div>
                   <button
-                    onClick={() => {
-                      const newState = !autoRebalanceBot;
-                      setAutoRebalanceBot(newState);
-                      if (newState) runAIAnalysis();
-                    }}
+                    onClick={() => setAutoRebalanceBot(!autoRebalanceBot)}
                     className={`w-11 h-6 rounded-full transition-colors flex items-center px-1 ${autoRebalanceBot ? 'bg-emerald-500 justify-end' : 'bg-slate-800 justify-start'}`}
                   >
                     <span className="w-4 h-4 rounded-full bg-white shadow-md"></span>
